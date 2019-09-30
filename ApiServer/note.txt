@@ -1,0 +1,38 @@
+ // ASP.net webapp required 2.2.0 
+ //https://developer.okta.com/blog/2019/04/10/build-rest-api-with-aspnetcore
+ // tutorial with webapp with model and token
+ 
+ 
+ // need to install aspnet-codegenerator
+ //https://stackoverflow.com/questions/51128038/no-executable-found-matching-command-dotnet-aspnet-codegenerator-asp-net-core
+  dotnet tool install --global dotnet-aspnet-codegenerator
+  
+ 
+ // dotnet aspnet-codegenerator has issue with asp.net 2.2.0
+ //https://github.com/aspnet/Scaffolding/issues/976
+ dotnet aspnet-codegenerator controller -api -async -m User -dc TestDbContext -name ValuesController -f -outDir Controllers -udl
+
+
+// install in RestSharp
+// dotnet add package RestSharp --version 106.6.10
+
+example
+
+[HttpGet("call")]
+    public IActionResult GetById()
+    {
+        var client = new RestClient("https://jsonplaceholder.typicode.com/posts/1/comments");
+        var request = new RestRequest(Method.GET);
+        IRestResponse response = client.Execute(request);
+
+        JavascriptSerializer json_serializer = new Java
+
+        return response.Content;
+    }
+
+
+// install Newtonsoft.json 
+// since .NET core dont have JavascriptSerializer, we will be using Newtonsoft
+// dotnet add package Newtonsoft.Json --version 12.0.2
+// document of json.NET
+//https://www.newtonsoft.com/json/help/html/SerializeUnindentedJson.htm
